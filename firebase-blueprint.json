@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public and private user profile information.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "email", "createdAt"]
+    },
+    "JournalEntry": {
+      "title": "Journal Entry",
+      "description": "A user's journal entry with AI analysis results.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" },
+        "feedback": { "type": "boolean" },
+        "analysis": {
+          "type": "object",
+          "properties": {
+            "sentiment": {
+              "type": "object",
+              "properties": {
+                "score": { "type": "number" },
+                "label": { "type": "string" },
+                "explanation": { "type": "string" }
+              }
+            },
+            "distortions": {
+              "type": "array",
+              "items": { "type": "object" }
+            },
+            "riskLevels": {
+              "type": "array",
+              "items": { "type": "object" }
+            },
+            "recommendations": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["id", "content", "timestamp", "userId"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    },
+    "users/{userId}/entries/{entryId}": {
+      "schema": "JournalEntry",
+      "description": "Subcollection of journal entries for a specific user."
+    }
+  }
+}

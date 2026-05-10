@@ -1,0 +1,6 @@
+{
+  "name": "Remix: MindGuard AI",
+  "description": "An AI-powered mental health companion that analyzes journals for sentiment, emotion, cognitive distortions, and risk markers, providing an interactive project roadmap and therapist matching.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
